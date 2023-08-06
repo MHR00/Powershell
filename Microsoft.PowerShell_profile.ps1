@@ -13,7 +13,7 @@ function ping ($count = 10)
 }
 function coreToken
 {
-	curl https://sit-hamkari.saminray.com/auth/Auth/LoginWithPassword -H "Content-Type: application/json" -d '{"username": "core", "password": "0!9@8#7$6%"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
+	curl https://auth-api.23055.ir/Auth/LoginWithPassword -H "Content-Type: application/json" -d '{"username": "core", "password": "0!9@8#7$6%"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
 }
 function microserviceToken
 {
@@ -63,6 +63,11 @@ function Get-AuthToken {
     $uri = 'https://sit-hamkari.saminray.com/auth/Auth/LoginWithPassword'
     $response = Invoke-RestMethod -Uri $uri -Method Post -Body $json -Headers $headers -UseBasicParsing -SkipCertificateCheck 
     return $response }
+
+function MerchantToken
+{
+	curl https://sit-merchants.saminray.com/auth/Auth/LoginWithPassword -H "Content-Type: application/json" -d '{"username": "2050669615", "password": "a`12345"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
+}
 # NatinalCode 
 function Generate-NationalCode {
     $numbers = @()
@@ -182,4 +187,10 @@ function PostalCode {
        Write-Host $code 
        $code | Set-Clipboard
        }
+function live {
+    $live = "86.104.33.132 
+             administrator 'lah,vhk$sfc,l,tr1401' 
+             daya 'aSjH@#$1414' "
+    Write-Host $live 
+}
 
