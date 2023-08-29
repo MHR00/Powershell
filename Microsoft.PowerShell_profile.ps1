@@ -27,7 +27,6 @@ function consultantTokne
 {
 	curl https://sit-hamkari.saminray.com/auth/Auth/LoginWithPassword -H "Content-Type: application/json" -d '{"username": "2050669615", "password": "09376997370"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
 }
-
 function token
 {
   param (
@@ -68,6 +67,17 @@ function MerchantToken
 {
 	curl https://sit-merchants.saminray.com/auth/Auth/LoginWithPassword -H "Content-Type: application/json" -d '{"username": "2050669615", "password": "a`12345"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
 }
+
+function IrancellToken
+{
+	curl https://sit-irancell.saminray.com/auth/Auth/BasicLoginWithPassword -H "Content-Type: application/json" -d '{"username": "mtnicl_core", "password": "123456"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
+}
+
+function IrancellToken_live
+{
+	curl http://10.222.253.119:8020/Auth/BasicLoginWithPassword -H "Content-Type: application/json" -d '{"username": "mtnicl_core", "password": "123456"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
+}
+
 # NatinalCode 
 function Generate-NationalCode {
     $numbers = @()
@@ -122,7 +132,7 @@ function Disable-DNS {
    }
 
 # Generate Random Number
-function Get-RandomNumber {
+function GetRandomNumber {
        [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
@@ -163,7 +173,7 @@ function mobile4 {
     $mobileNumber = "09335131222"
     $mobileNumber | Set-Clipboard
 }
-
+#PostalCode
 function PostalCode {
     $code = ""
     for ($i = 0; $i -lt 10; $i++) {
@@ -187,10 +197,18 @@ function PostalCode {
        Write-Host $code 
        $code | Set-Clipboard
        }
+#live
 function live {
     $live = "86.104.33.132 
-             administrator 'lah,vhk$sfc,l,tr1401' 
-             daya 'aSjH@#$1414' "
-    Write-Host $live 
+administrator 'lah,vhk$sfc,l,tr1401' 
+daya 'aSjH@#$1414' "
+   Write-Host $live 
+}
+
+#irancell
+function irancell {
+    $irancell = "mohammadhossein.ro 
+0ynGPW4ke@7G"
+Write-Host $irancell
 }
 
