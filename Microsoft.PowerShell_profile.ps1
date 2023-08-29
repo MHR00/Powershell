@@ -197,13 +197,6 @@ function PostalCode {
        Write-Host $code 
        $code | Set-Clipboard
        }
-#live
-function live {
-    $live = "86.104.33.132 
-administrator 'lah,vhk$sfc,l,tr1401' 
-daya 'aSjH@#$1414' "
-   Write-Host $live 
-}
 
 #irancell
 function irancell {
