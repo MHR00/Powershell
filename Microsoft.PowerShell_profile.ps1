@@ -70,7 +70,7 @@ function MerchantToken
 
 function IrancellToken
 {
-	curl https://sit-irancell.saminray.com/auth/Auth/BasicLoginWithPassword -H "Content-Type: application/json" -d '{"username": "mtnicl_core", "password": "123456"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
+	curl http://10.222.253.116:8014/idn/Auth/LoginWithPassword_V2 -H "Content-Type: application/json" -d '{"username": "mtnicl_core", "password": "123456"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
 }
 
 function IrancellToken_live
@@ -133,17 +133,7 @@ function Disable-DNS {
 
 # Generate Random Number
 function GetRandomNumber {
-       [CmdletBinding()]
-    param(
-        [Parameter(Mandatory=$true)]
-        [int]$NumberOfDigits
-    )
-
-    $min = [math]::Pow(10, $NumberOfDigits - 1)
-    $max = [math]::Pow(10, $NumberOfDigits) - 1
-
-    [int](Get-Random -Minimum $min -Maximum $max) | Set-Clipboard
-    }
+   [int][double]::Parse((Get-Date -UFormat %s))}
 
 # My Card
 function card {
