@@ -195,3 +195,19 @@ function irancell {
 Write-Host $irancell
 }
 
+#Get-ShamsiDate
+function sDate {
+    # Get the current date
+    $currentDate = Get-Date
+
+    # Determine the Shamsi year, month, and day
+    $culture = New-Object System.Globalization.PersianCalendar
+    $year = $culture.GetYear($currentDate)
+    $month = $culture.GetMonth($currentDate)
+    $day = $culture.GetDayOfMonth($currentDate)
+
+    # Return the Shamsi date
+    $shamsiDate = "$year/$month/$day"
+    Write-Host  "$shamsiDate"
+}
+
