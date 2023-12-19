@@ -17,7 +17,7 @@ function coreToken
 }
 function microserviceToken
 {
-	curl https://sit-hamkari.saminray.com/auth/Auth/LoginWithPassword -H "Content-Type: application/json" -d '{"username": "Api.core", "password": "a`123456"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
+	curl https://auth-api.23055.ir/Auth/LoginWithPassword -H "Content-Type: application/json" -d '{"username": "Api.core", "password": "a`123456"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
 }
 function centerToken
 {
@@ -71,6 +71,10 @@ function MerchantToken
 function IrancellToken
 {
 	curl http://10.222.253.116:8014/idn/Auth/LoginWithPassword_V2 -H "Content-Type: application/json" -d '{"username": "mtnicl_core", "password": "123456"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
+}
+function IrancellToken2
+{
+	curl http://10.222.253.116:8014/idn/Auth/LoginWithLDAP -H "Content-Type: application/json" -d '{"user": "mohammadhossein.ro", "pass": "@mo25@ro4635"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
 }
 
 function IrancellToken_live
