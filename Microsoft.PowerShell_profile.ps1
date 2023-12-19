@@ -7,6 +7,14 @@ Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadlineOption -EditMode vi
 
+function gpl 
+{
+  git commit -am 'add' && git pull origin master
+}
+function gps 
+{
+  git commit -am 'add' && git push origin master
+}
 function ping ($count = 10)
 {
  Test-Connection -Ping 8.8.8.8 -Count $count
