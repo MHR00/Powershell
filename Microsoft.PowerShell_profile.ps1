@@ -7,11 +7,11 @@ Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadlineOption -EditMode vi
 
-function gpl 
+function gpull 
 {
   git commit -am 'add' && git pull origin master
 }
-function gps 
+function gpush 
 {
   git commit -am 'add' && git push origin master
 }
