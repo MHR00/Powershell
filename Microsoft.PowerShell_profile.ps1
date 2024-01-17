@@ -1,5 +1,9 @@
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/amro.omp.json" | Invoke-Expression
 
+#Alias
+Set-Alias vi nvim 
+Set-Alias grep Select-String
+
 Import-Module -Name Terminal-Icons
 Import-Module posh-git
 
@@ -13,7 +17,7 @@ function gpull
 }
 function gpush 
 {
-  git commit -am 'add' && git push origin master
+  git add . && commit -m 'add' && git push origin master
 }
 function ping ($count = 10)
 {
@@ -29,11 +33,11 @@ function microserviceToken
 }
 function centerToken
 {
-	curl https://sit-hamkari.saminray.com/auth/Auth/LoginWithPassword -H "Content-Type: application/json" -d '{"username": "99887766", "password": "123456"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
+	curl  https://auth-api.23055.ir/Auth/LoginWithPassword -H "Content-Type: application/json" -d '{"username": "3232, "password": "123456"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
 }
 function consultantTokne
 {
-	curl https://sit-hamkari.saminray.com/auth/Auth/LoginWithPassword -H "Content-Type: application/json" -d '{"username": "2050669615", "password": "09376997370"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
+	curl  https://auth-api.23055.ir/Auth/LoginWithPassword -H "Content-Type: application/json" -d '{"username": "0043186904, "password": "09376997370"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
 }
 function token
 {
@@ -42,9 +46,18 @@ function token
        [string]$password
    )
   $data = @{ password = "$password";username= "$username" }| ConvertTo-Json
-  curl https://sit-hamkari.saminray.com/auth/Auth/LoginWithPassword -H "Content-Type: application/json"  -d $data --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
+  curl  https://auth-api.23055.ir/Auth/LoginWithPassword -H "Content-Type: application/json"  -d $data --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
 }
 
+function mtnToken
+{
+  param (
+       [string]$username,
+       [string]$password
+   )
+  $data = @{ password = "$password";username= "$username" }| ConvertTo-Json
+  curl http://10.222.253.116:8014/idn/Auth/LoginWithPassword_V2 -H "Content-Type: application/json"  -d $data --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
+}
 function get-token
 {
   param (
