@@ -3,6 +3,8 @@ oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/amro.omp.json" | Invoke-Exp
 #Alias
 Set-Alias vi nvim 
 Set-Alias grep Select-String
+Set-Alias gpush "git commit -am 'add' && git pull origin master && git push origin master"
+#Set-Alias -Name lazygit -Value { git add .; git commit -m 'add'; git pull origin master; git push origin master }
 
 Import-Module -Name Terminal-Icons
 Import-Module posh-git
@@ -95,7 +97,7 @@ function IrancellToken
 }
 function IrancellToken2
 {
-	curl http://10.222.253.116:8014/idn/Auth/LoginWithLDAP -H "Content-Type: application/json" -d '{"user": "mohammadhossein.ro", "pass": "@mo25@ro4635"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
+	curl http://10.222.253.116:8014/idn/Auth/LoginWithLDAP -H "Content-Type: application/json" -d '{"user": "mtnirancell\\arman.ne", "pass": "Arm@@@141312"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
 }
 
 function IrancellToken_live
@@ -235,4 +237,42 @@ function sDate {
     $shamsiDate = "$year/$month/$day"
     Write-Host  "$shamsiDate"
 }
+
+function Generate-Password {
+    param (
+        [int]$Length = 12
+    )
+
+    # Define character sets for the password
+    $UpperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    $LowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz'
+    $Numbers = '0123456789'
+    $SpecialCharacters = '!@#$%^&*()-_+='
+
+    # Combine character sets
+    $AllCharacters = $UpperCaseLetters + $LowerCaseLetters + $Numbers + $SpecialCharacters
+
+    # Initialize a secure random number generator
+    $Random = New-Object -TypeName System.Security.Cryptography.RNGCryptoServiceProvider
+    $RandomBytes = New-Object byte[] ($Length * 4)
+    $Random.GetBytes($RandomBytes)
+
+    # Build the random password
+    $Password = ''
+    1..$Length | ForEach-Object {
+        $RandomIndex = [BitConverter]::ToUInt32($RandomBytes, ($_ - 1) * 4) % $AllCharacters.Length
+        $Password += $AllCharacters[$RandomIndex]
+    }
+
+ Write-Host $Password 
+       $Password | Set-Clipboard
+
+}
+
+#mtnPassword
+function mtnPassword {
+    $password = 'DIB^s7rlfxPi'
+    Write-Host $password | Set-Clipboard
+  }
+
 
