@@ -3,8 +3,6 @@ oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/amro.omp.json" | Invoke-Exp
 #Alias
 Set-Alias vi nvim 
 Set-Alias grep Select-String
-Set-Alias gpush "git commit -am 'add' && git pull origin master && git push origin master"
-#Set-Alias -Name lazygit -Value { git add .; git commit -m 'add'; git pull origin master; git push origin master }
 
 Import-Module -Name Terminal-Icons
 Import-Module posh-git
@@ -19,7 +17,7 @@ function gpull
 }
 function gpush 
 {
-  git add . && commit -m 'add' && git push origin master
+  git commit -am 'add' && git pull origin master && git push origin master
 }
 function ping ($count = 10)
 {
