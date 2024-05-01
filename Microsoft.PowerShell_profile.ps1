@@ -13,7 +13,7 @@ Set-PSReadlineOption -EditMode vi
 
 function gpull
 {
-  git commit -am 'add' && git pull origin master
+  git commit -am 'add' && git pull origin master && git push origin master
 }
 function gpush
 {
@@ -171,22 +171,11 @@ function card2 {
     Write-Host $creditCardNumber
     $creditCardNumber | Set-Clipboard
 }
-# Some MobileNumber
-function mobile1 {
-    $mobileNumber = "09301130346"
-    $mobileNumber | Set-Clipboard
-}
-function mobile2 {
-    $mobileNumber = "09337852343"
-    $mobileNumber | Set-Clipboard
-}
-function mobile3 {
-    $mobileNumber = "09336548762"
-    $mobileNumber | Set-Clipboard
-}
-function mobile4 {
-    $mobileNumber = "09335131222"
-    $mobileNumber | Set-Clipboard
+function Generate-MobileNumber {
+  $prefix = "0938"
+  $suffix = -join (1..9 | Get-Random -Count 8 | % {"$_"})
+  $result = $prefix + $suffix
+  $result | Set-Clipboard
 }
 #PostalCode
 function PostalCode {
@@ -273,4 +262,50 @@ function mtnPassword {
     Write-Host $password | Set-Clipboard
   }
 
+function sheba {
+param ($sheba)
+$number = $sheba.Substring(4,3)
+
+  if ($number -like "*013*") {
+    "Refah"
+  } elseif ($number -like "*056*") {
+    "Saman"
+  } elseif ($number -like "*015*") {
+    "Sepah"
+  } elseif ($number -like "*062*") {
+    "Taat"
+  } elseif ($number -like "*021*") {
+    "Post IRan"
+  } elseif ($number -like "*061*") {
+    "Shahr"
+  } elseif ($number -like "*017*") {
+    "Melli"
+  } elseif ($number -like "*012*") {
+    "Mellat"
+  } elseif ($number -like "*018*") {
+    "tejarat"
+  } elseif ($number -like "*055*") {
+    "eghtesad novin"
+  } elseif ($number -like "*059*") {
+    "sina"
+  } elseif ($number -like "*020*") {
+    "tosee saderat"
+  } elseif ($number -like "*016*") {
+    "kashavarsi"
+  } elseif ($number -like "*019*") {
+    "saderat"
+  } elseif ($number -like "*014*") {
+    "maskan"
+  } elseif ($number -like "*054*") {
+    "parsian"
+  } elseif ($number -like "*062*") {
+    "Ayandeh"
+  } elseif ($number -like "*060*") {
+    "Meher"
+  } elseif ($number -like "*057*") {
+    "Pasargard"
+  } else {
+    "Unknown"
+  }
+}
 
