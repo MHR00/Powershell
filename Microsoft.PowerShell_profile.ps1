@@ -93,11 +93,6 @@ function IrancellToken
 {
 	curl http://10.222.253.116:8014/idn/Auth/LoginWithPassword_V2 -H "Content-Type: application/json" -d '{"username": "mtnicl_core", "password": "123456"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
 }
-function IrancellToken2
-{
-	curl http://10.222.253.116:8014/idn/Auth/LoginWithLDAP -H "Content-Type: application/json" -d '{"user": "mtnirancell\\arman.ne", "pass": "Arm@@@141312"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
-}
-
 function IrancellToken_live
 {
 	curl http://10.222.253.119:8020/Auth/BasicLoginWithPassword -H "Content-Type: application/json" -d '{"username": "mtnicl_core", "password": "123456"}' --ssl-no-revoke | Select-String -Pattern '(?<="accessToken":")[^"]+' | ForEach-Object {$_.Matches.Value} | Set-Clipboard
@@ -308,4 +303,45 @@ $number = $sheba.Substring(4,3)
     "Unknown"
   }
 }
+function Decode-JwtToken {
+  param (
+    [string]$Token
+  )
 
+  $tokenHeader = $Token.Split(".")[0].Replace('-', '+').Replace('_', '/')
+  while ($tokenHeader.Length % 4) {
+    $tokenHeader += "="
+  }
+
+  $tokenPayload = $Token.Split(".")[1].Replace('-', '+').Replace('_', '/')
+  while ($tokenPayload.Length % 4) {
+    $tokenPayload += "="
+  }
+
+  $headerJson = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($tokenHeader)) | ConvertFrom-Json
+  $payloadJson = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($tokenPayload)) | ConvertFrom-Json
+
+  [PSCustomObject]@{
+    Header = $headerJson
+    Payload = $payloadJson
+  }
+}
+
+function Decode-Token {
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$Token
+    )
+
+    try {
+        $decodedToken = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($Token))
+        return $decodedToken
+    } catch {
+        Write-Host "Error decoding token: $_"
+        return $null
+    }
+}
+
+function Generate-Guid{
+    [guid]::NewGuid().ToString() | Set-Clipboard
+  }
